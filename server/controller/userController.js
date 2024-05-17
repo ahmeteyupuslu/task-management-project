@@ -1,9 +1,11 @@
 const database = require("../services/database.js");
+const bcrypt = require("bcryptjs");
 
 const getUsers = async (req, res) => {
   try {
-    const result = await database.pool.query("SELECT * FROM users");
-    return res.status(200).json(result.rows);
+    const result = await database.pool.query("SELECT * FROM users WHERE is_active = true");
+    users=result.rows;
+    return res.status(200).json({ success: true, users });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -17,21 +19,18 @@ const createUser = async (req, res) => {
       !req.body.email ||
       !req.body.password
     ) {
-      return res
-        .status(422)
-        .json({ success: false, message: "Missing required fields" });
+      return res.status(422).json({ message: "Missing required fields" });
     }
 
     const existResult = await database.pool.query({
       text: `SELECT EXISTS (SELECT * FROM public.users WHERE username = $1 OR email = $2)`,
       values: [req.body.username, req.body.email],
     });
-
-    if (existResult.rowCount > 0) {
-      return res
-        .status(409)
-        .json({ success: false, message: "User already exists" });
+    if (existResult.rows[0].exists === true) {
+      return res.status(409).json({ message: "User already exists" });
     }
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const result = await database.pool.query({
       text: `INSERT INTO public.users(username, name, email, "is_admin", "is_active", password)
@@ -42,14 +41,13 @@ const createUser = async (req, res) => {
         req.body.email,
         req.body.is_admin ? req.body.is_admin : false,
         req.body.is_active ? req.body.is_active : true,
-        req.body.password,
+        (req.body.password = hashedPassword),
       ],
     });
-
     if (result.rowCount > 0) {
       return res
         .status(201)
-        .json({ success: true, message: "User created successfully" });
+        .json({ success: true, message: "User created successfully"});
     } else {
       return res
         .status(500)
@@ -125,14 +123,14 @@ const deleteUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-}
+};
 
 const getUserById = async (req, res) => {
-  try{
+  try {
     const result = await database.pool.query({
       text: `SELECT * FROM users WHERE id = $1`,
-      values: [req.params.id]
-    })
+      values: [req.params.id],
+    });
 
     if (result.rowCount == 0) {
       return res.status(404).json({ error: "User not found" });
@@ -141,5 +139,5 @@ const getUserById = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
-}
+};
 module.exports = { getUsers, createUser, updateUser, deleteUser, getUserById };

@@ -1,0 +1,17 @@
+.box1{
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.box2 {
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    border-color: white;
+    border: 2px;
+    border-style: solid;
+    font-size: large;
+}
