@@ -1,15 +1,13 @@
-import { useState } from "react";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { createContext, useEffect } from "react";
-import axios from "axios";
+import { createContext } from "react";
 
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import WelcomePage from "./pages/WelcomePage";
 import UserPage from "./pages/UserPage";
 import ProjectsPage from "./pages/ProjectsPage";
-
+import TaskPage from "./pages/TaskPage";
 export const UserContext = createContext(null);
 
 const router = createBrowserRouter([
@@ -40,6 +38,11 @@ const router = createBrowserRouter([
         <ProjectsPage />
       </ProtectedRoutes>
     )
+  },
+  {
+    path: "/projects/:project_id/task",
+    element: 
+        <TaskPage />
   }
 ]);
 

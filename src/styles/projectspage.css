@@ -1,0 +1,30 @@
+.add-project{
+    display: flex;
+    justify-content:flex-start;
+    width: 90%;
+    text-align: center;
+    align-items: center;
+}
+
+.add-project h3{
+    margin-right: 10px;
+}
+
+.add-btn{
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    border: purple;
+}
+
+.add-pr{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.projects-h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

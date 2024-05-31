@@ -1,0 +1,26 @@
+.tasks-h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.comments-container {
+    height: 100px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+    margin-top: 1rem;
+  }
+  
+  .comments {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .comments ul {
+    list-style: none; /* Remove bullets */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
+  
+  .comments ul li {
+    margin-bottom: 10px; /* Add spacing between comments */
+  }

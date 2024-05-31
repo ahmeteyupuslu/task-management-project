@@ -3,8 +3,10 @@ const bcrypt = require("bcryptjs");
 
 const getUsers = async (req, res) => {
   try {
-    const result = await database.pool.query("SELECT * FROM users WHERE is_active = true");
-    users=result.rows;
+    const result = await database.pool.query(
+      "SELECT id, username, name, email, is_admin, is_active FROM users WHERE is_active = true"
+    );
+    users = result.rows;
     return res.status(200).json({ success: true, users });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -47,7 +49,7 @@ const createUser = async (req, res) => {
     if (result.rowCount > 0) {
       return res
         .status(201)
-        .json({ success: true, message: "User created successfully"});
+        .json({ success: true, message: "User created successfully" });
     } else {
       return res
         .status(500)
@@ -102,7 +104,8 @@ const updateUser = async (req, res) => {
     if (result.rowCount == 0) {
       return res.status(404).json({ error: "User not found" });
     }
-    return res.status(200).json(result.rows[0]);
+    user= result.rows[0];
+    return res.status(200).json({ success: true, user });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -119,7 +122,8 @@ const deleteUser = async (req, res) => {
     if (result.rowCount == 0) {
       return res.status(404).json({ error: "User not found" });
     }
-    return res.status(200).json(result.rows[0]);
+    user = result.rows[0];
+    return res.status(200).json({ success: true, user });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

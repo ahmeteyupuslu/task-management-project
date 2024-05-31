@@ -1,34 +1,24 @@
-import { useNavigate } from 'react-router-dom';
-import '../styles/welcomepage.css';
-import { jwtDecode } from 'jwt-decode';
+import "../styles/welcomepage.css";
+import { jwtDecode } from "jwt-decode";
+import Navbar from "../components/Navbar";
 
 const WelcomePage = () => {
-    const token = localStorage.getItem("token");
-    console.log(token);
-    const decoded = jwtDecode(token);
-    console.log(decoded);
-    const isAdmin = decoded.isAdmin;
-    const fullName = decoded.name;
-    console.log(fullName);
-    const navigate = useNavigate();
-    
-    const handleUsersClick = () => {
-        navigate('/users');
-    }
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  const fullName = decoded.name;
 
-    const handleProjectClick = () => {
-        navigate('/projects');
-    }
   return (
-    <div>
-      <h1>Welcome {fullName}!</h1>
-      <div className="box1">
-      <div className='box2' onClick={handleProjectClick}>Projects</div>
-      {isAdmin === true ? (
-        <div className='box2' onClick={handleUsersClick}>Users</div>
-      ):null}
+    <>
+      <Navbar />
+      <div className="welcome-text">
+        <h1>Welcome {fullName}!</h1>
+        <h4>
+          With this app you can access project that you included.Also you can
+          see all task in project. You can comment these tasks.
+        </h4>
+        <h4>If you have permission you can create projects, users and task.</h4>
       </div>
-    </div>
+    </>
   );
 };
 

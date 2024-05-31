@@ -15,3 +15,8 @@
     border-style: solid;
     font-size: large;
 }
+
+.welcome-text{
+    width: 30%;
+    margin: 3rem 0 0 5rem;
+}

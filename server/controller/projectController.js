@@ -7,11 +7,10 @@ const getProjects = async (req, res) => {
     const authHeader = req.headers.authorization;
     const token = authHeader.split(" ")[1];
     const decodedToken = jwt.verify(token, config.accessTokenSecret);
-    const userId = decodedToken.id; // Assuming you get userId from decoded JWT
+    const userId = decodedToken.id;
     const isAdmin = decodedToken.isAdmin;
 
     if (isAdmin) {
-      // Admin: Fetch all active projects
       query = "SELECT * FROM project WHERE is_active = true";
       values = [];
     } else {
@@ -50,7 +49,8 @@ const createProject = async (req, res) => {
         req.body.end_date,
       ],
     });
-    return res.status(201).json(result.rows[0]);
+    project = result.rows[0];
+    return res.status(201).json({ success: true, project});
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -76,7 +76,8 @@ const updateProject = async (req, res) => {
     if (result.rowCount == 0) {
       return res.status(404).json({ error: "Project not found" });
     }
-    return res.status(200).json(result.rows[0]);
+    project = result.rows[0];
+    return res.status(200).json({success: true, project});
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

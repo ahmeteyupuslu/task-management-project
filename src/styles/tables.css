@@ -1,0 +1,113 @@
+table {
+  width: 90%; /* Tam genişlik */
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+th,
+td {
+ /*  border: 1px solid #041c32; */
+ border: 2px solid white;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+  text-align: center;
+  background-color: rgba(4, 41, 58, 0.8);
+  color: #d4cec4;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(4, 41, 58, 0.8);
+  color: #d4cec4;
+}
+
+tr:nth-child(odd) {
+  background-color: rgba(4, 41, 58, 0.6);
+  color: #d4cec4;
+}
+
+tr a {
+  color: #d4cec4;
+}
+
+
+/* Düzenleme ve Silme Butonları */
+.edit-btn {
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.delete-btn {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.tasks-btn {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.comment-btn {
+  font-size: 12px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.actions-column {
+  text-align: center;
+  width: 7%;
+}
+
+.tasks-btn {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.td-actions {
+  text-align: center;
+  width: 7%;
+}
+
+
+.date-column{
+    width:1%;
+    text-align: right;
+}
+
+.owner-column{
+    width:1%;
+    text-align: center;
+}
+
+.index-column {
+    width: 1%;
+    text-align: right;
+}
+
+
+.table-div {
+    justify-content: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  
+.td-taskstatus{
+  width: 9%;
+  text-align: center;
+}
+
+.kk1{
+  text-align: center;
+}
+.kk2{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
